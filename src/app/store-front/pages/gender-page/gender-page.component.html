@@ -1,0 +1,12 @@
+<h1 class="text-3xl font-bold">Todos los productos de <span class="text-accent"> {{gender() | uppercase}} </span></h1>
+<h2 class="text-xl mb-5">Para todos los gustos</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-2 gap-4">
+
+  @for (product of products(); track $index) {
+    <product-card [product]="product"/>
+  }
+
+</div>
+
+<app-pagination [pages]="page() " [currentPage]="paginationService.currentPage() "/>
