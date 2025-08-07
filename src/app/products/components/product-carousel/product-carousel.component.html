@@ -9,8 +9,12 @@
       <div class="swiper-slide">
         <img [src]="image | productImage"  class="w-full object-cover">
       </div>
+    } @empty {
+      <div class="swiper-slide">
+        <img [src]="null | productImage"  class="w-full object-cover">
+      </div>
     }
-    ...
+
   </div>
   <!-- If we need pagination -->
   <div class="swiper-pagination"></div>

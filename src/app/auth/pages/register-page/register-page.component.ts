@@ -25,6 +25,8 @@ fb = inject(FormBuilder)
   });
 
   onSumbit() {
+
+
     if(this.registerForm.invalid){
       this.hasError.set(true)
       setTimeout(() => {
@@ -33,6 +35,8 @@ fb = inject(FormBuilder)
       return;
     }
 
+
+    
     const {fullName = '', email = '', password = '' } = this.registerForm.value
 
     this.authService.register(fullName!,email!,password!).subscribe((isAuthenticated)=>{

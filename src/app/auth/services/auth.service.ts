@@ -35,6 +35,8 @@ export class AuthService {
 
   token = computed(this._token);
 
+  isAdmin = computed(() => this._user()?.roles.includes('admin') ?? false )
+
   login(email:string, password: string):Observable<boolean>{
     return this.http.post<AuthResponse>(`${baseUrl}/auth/login`,{
       email: email,
@@ -66,9 +68,9 @@ export class AuthService {
     }
 
     return this.http.get<AuthResponse>(`${baseUrl}/auth/check-status`, {
-      headers: {
-         Authorization: `Bearer ${token}`
-       }
+      // headers: {
+      //    Authorization: `Bearer ${token}`
+      //  }
     }).pipe(
       tap(resp =>this.handleAuthSuccess(resp)),
       map( () => true),
@@ -85,12 +87,12 @@ export class AuthService {
   }
 
   private handleAuthSuccess({token, user}: AuthResponse){
-    this._user.set(user);
-        this._authStatus.set('authenticated');
-        this._token.set(token);
+  this._authStatus.set('authenticated');
+  this._token.set(token);
+  this._user.set(user);
+  localStorage.setItem('token', token);
+}
 
-        localStorage.setItem('token', token);
-  }
 
   private handleAuthError(error: any){
     this.logout();
